@@ -3,11 +3,11 @@
 
 #include "chessboard.h"
 
-ChessBoard::ChessBoard(Player playerA, Player playerB)
+ChessBoard::ChessBoard(Player &playerA, Player &playerB)
 {
     // Assigning the Players their roles
     std::srand(time(0));
-    bool isAFirst = std::rand() % 2 == 0;
-    playerA.assignColor(isAFirst ? WHITE : BLACK);
-    playerB.assignColor(isAFirst ? BLACK : WHITE);
+    bool isFirst = std::rand() % 2 == 0;
+    playerA.assignColor(isFirst ? WHITE : BLACK);
+    playerB.assignColor(isFirst ? BLACK : WHITE);
 }

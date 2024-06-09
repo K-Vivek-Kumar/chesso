@@ -17,3 +17,8 @@ void Player::assignColor(chessPlayer color)
 {
     youAre = color;
 }
+
+chessPlayer Player::getColor() const
+{
+    return youAre;
+}

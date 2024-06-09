@@ -15,6 +15,8 @@ public:
     const char *getUsername() const;
 
     void assignColor(chessPlayer color);
+
+    chessPlayer getColor() const;
 };
 
 #endif

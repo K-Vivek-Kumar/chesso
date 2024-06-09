@@ -11,7 +11,7 @@ private:
     chessPiece board[8][8];
 
 public:
-    ChessBoard(Player playerA, Player playerB);
+    ChessBoard(Player &playerA, Player &playerB);
 };
 
 #endif

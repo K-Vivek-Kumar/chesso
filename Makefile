@@ -30,12 +30,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 
 # Create dist directory if it doesn't exist
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	mkdir $(OBJ_DIR)
 
 
 # Clean
 clean:
-	rm -rf $(OBJ_DIR)/*.o $(TARGET)
+	del /q $(subst /,\,$(OBJ_DIR))\*.o
+	del /q $(subst /,\,$(TARGET))
 
 
 # Phony targets

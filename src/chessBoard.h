@@ -7,11 +7,13 @@
 class ChessBoard
 {
 private:
-    chessPlayer playerTurn;
-    chessPiece board[8][8];
+    chessPlayerType playerTurn;
+    ChessPiece board[8][8];
 
 public:
-    ChessBoard(Player &playerA, Player &playerB);
+    ChessBoard(Player &playerA, Player &playerB, Player *toStart = nullptr);
+    void setToInitialConfiguration();
+    void printBoard() const;
 };
 
 #endif

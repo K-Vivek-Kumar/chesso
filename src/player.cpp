@@ -13,12 +13,12 @@ const char *Player::getUsername() const
     return username;
 }
 
-void Player::assignColor(chessPlayer color)
+void Player::assignColor(chessPlayerType color)
 {
     youAre = color;
 }
 
-chessPlayer Player::getColor() const
+chessPlayerType Player::getColor() const
 {
     return youAre;
 }

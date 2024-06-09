@@ -2,21 +2,22 @@
 #define PLAYER_H
 
 #include "types.h"
+#include "settings.h"
 
 class Player
 {
 private:
     char username[50];
-    chessPlayer youAre;
+    chessPlayerType youAre;
 
 public:
     Player(const char *name);
 
     const char *getUsername() const;
 
-    void assignColor(chessPlayer color);
+    void assignColor(chessPlayerType color);
 
-    chessPlayer getColor() const;
+    chessPlayerType getColor() const;
 };
 
 #endif

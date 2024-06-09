@@ -1,7 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-enum chessPiece
+enum chessPieceType
 {
     EMPTY,
     PAWN,
@@ -12,10 +12,23 @@ enum chessPiece
     KING,
 };
 
-enum chessPlayer
+enum chessPlayerType
 {
     WHITE,
     BLACK,
+};
+
+enum chessPieceColorType
+{
+    EMPTY_COLOR,
+    WHITE_COLOR,
+    BLACK_COLOR,
+};
+
+struct ChessPiece
+{
+    chessPieceColorType color;
+    chessPieceType type;
 };
 
 #endif

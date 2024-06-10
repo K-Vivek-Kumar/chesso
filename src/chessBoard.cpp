@@ -6,13 +6,11 @@
 
 ChessBoard::ChessBoard(Player &playerA, Player &playerB, Player *toStart)
 {
-    // Assigning the Players their roles
     std::srand(static_cast<unsigned>(time(0)));
     bool isFirst = std::rand() % 2 == 0;
     playerA.assignColor(isFirst ? WHITE : BLACK);
     playerB.assignColor(isFirst ? BLACK : WHITE);
 
-    // If preferrence given
     if (toStart != nullptr)
     {
         if (toStart == &playerA)
@@ -27,10 +25,8 @@ ChessBoard::ChessBoard(Player &playerA, Player &playerB, Player *toStart)
         }
     }
 
-    // player turn set to white
-    this->playerTurn = WHITE;
+    playerTurn = WHITE;
 
-    // SetUp the Initial ChessBoard
     this->setToInitialConfiguration();
 }
 
@@ -71,8 +67,13 @@ void ChessBoard::printBoard() const
     const std::string darkColor = "\033[0;36m";
     const std::string resetColor = "\033[0m";
 
+    std::cout << "     a b c d e f g h\n";
+    std::cout << "==========================\n";
+
     for (int row = 0; row < 8; ++row)
     {
+        std::cout << 8 - row << " || ";
+
         for (int col = 0; col < 8; ++col)
         {
             std::string squareColor;
@@ -101,26 +102,117 @@ void ChessBoard::printBoard() const
                 std::cout << squareColor << "- ";
                 break;
             case PAWN:
-                std::cout << pieceColor << "i ";
+                std::cout << pieceColor << "p ";
                 break;
             case ROOK:
-                std::cout << pieceColor << "H ";
+                std::cout << pieceColor << "r ";
                 break;
             case KNIGHT:
-                std::cout << pieceColor << "Z ";
-                break;
-            case QUEEN:
-                std::cout << pieceColor << "T ";
-                break;
-            case KING:
-                std::cout << pieceColor << "I ";
+                std::cout << pieceColor << "k ";
                 break;
             case BISHOP:
-                std::cout << pieceColor << "X ";
+                std::cout << pieceColor << "b ";
+                break;
+            case QUEEN:
+                std::cout << pieceColor << "q ";
+                break;
+            case KING:
+                std::cout << pieceColor << "K ";
                 break;
             }
             std::cout << resetColor;
         }
+        std::cout << " || " << 8 - row;
         std::cout << std::endl;
     }
+    std::cout << "==========================\n";
+    std::cout << "     a b c d e f g h\n";
+}
+
+int fileToCol(char file)
+{
+    return file - 'a';
+}
+
+int rankToRow(char rank)
+{
+    return 8 - (rank - '0');
+}
+
+bool isWithinBounds(int row, int col)
+{
+    return row >= 0 && row < 8 && col >= 0 && col < 8;
+}
+
+bool ChessBoard::validateMove(int startRow, int startCol, int endRow, int endCol) const
+{
+    if (!isWithinBounds(startRow, startCol) || !isWithinBounds(endRow, endCol))
+    {
+        return false;
+    }
+    if (startRow == endRow && startCol == endCol)
+    {
+        return false;
+    }
+    return true;
+}
+
+ChessPiece ChessBoard::whichPiece(char place[2])
+{
+    int col = fileToCol(place[0]);
+    int row = rankToRow(place[1]);
+
+    if (!isWithinBounds(row, col))
+    {
+        throw std::out_of_range("Position out of bounds");
+    }
+
+    return board[row][col];
+}
+
+void ChessBoard::printPiece(ChessPiece piece)
+{
+    std::cout << "Chesso says: ";
+
+    switch (piece.color)
+    {
+    case WHITE_COLOR:
+        std::cout << "White";
+        break;
+    case BLACK_COLOR:
+        std::cout << "Black";
+        break;
+    case EMPTY_COLOR:
+        std::cout << "Empty";
+        break;
+    }
+
+    std::cout << " ";
+
+    switch (piece.type)
+    {
+    case EMPTY:
+        std::cout << "";
+        break;
+    case PAWN:
+        std::cout << "Pawn";
+        break;
+    case ROOK:
+        std::cout << "Rook";
+        break;
+    case KNIGHT:
+        std::cout << "Knight";
+        break;
+    case BISHOP:
+        std::cout << "Bishop";
+        break;
+    case QUEEN:
+        std::cout << "Queen";
+        break;
+    case KING:
+        std::cout << "King";
+        break;
+    }
+
+    std::cout << std::endl;
 }

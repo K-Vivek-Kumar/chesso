@@ -7,13 +7,16 @@
 class ChessBoard
 {
 private:
-    chessPlayerType playerTurn;
     ChessPiece board[8][8];
+    bool validateMove(int, int, int, int) const;
 
 public:
+    chessPlayerType playerTurn;
     ChessBoard(Player &playerA, Player &playerB, Player *toStart = nullptr);
     void setToInitialConfiguration();
     void printBoard() const;
+    ChessPiece whichPiece(char place[2]);
+    void printPiece(ChessPiece);
 };
 
 #endif
